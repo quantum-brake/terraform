@@ -10,14 +10,9 @@ resource "aws_dynamodb_table" "this" {
   read_capacity = 20
   write_capacity = 20
   hash_key = "id"
-  range_key = "title"
 
   attribute {
     name = "id"
     type = "N"
-  }
-  attribute {
-    name = "title"
-    type = "S"
   }
 }
