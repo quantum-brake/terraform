@@ -6,20 +6,23 @@ const dynamodb = new AWS.DynamoDB({
 
 exports.handler = (event, context, callback) => {
     const params = {
+        Key: {
+            id: {
+                S: event.id
+            }
+        },
         TableName: process.env.TABLE_NAME
     };
-    dynamodb.scan(params, (err, data) => {
+    dynamodb.getItem(params, (err, data) => {
         if (err) {
             console.log(err);
             callback(err);
-        } else { const courses = data.Items.map(item => {
-            return {
-                id: item.id.S,
-                title: item.Title.S,
-                authorId: item.Authorid.S
-            };
-        });
-            callback(null, courses);
+        } else {
+            callback(null, {
+                id: data.Item.id.S,
+                title: data.Item.Title.S,
+                authorId: data.Item.AuthorId.s
+            });
         }
     });
 };

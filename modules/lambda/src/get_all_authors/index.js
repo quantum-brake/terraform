@@ -14,7 +14,7 @@ exports.handler = (event, context, callback) => {
             callback(err);
         } else { const authors = data.Items.map(item => {
             return {
-                id: item.id.N,
+                id: item.id.S,
                 First_Name: item.First_Name.S,
                 Last_Name: item.Last_Name.S
             };
