@@ -16,7 +16,7 @@ exports.handler = (event, context, callback) => {
             return {
                 id: item.id.S,
                 title: item.Title.S,
-                authorId: item.Authorid.S
+                authorId: item.AuthorId.S
             };
         });
             callback(null, courses);
