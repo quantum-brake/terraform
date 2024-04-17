@@ -137,7 +137,7 @@ module "lambda_function_get_course" {
   }
 
   use_existing_cloudwatch_log_group = true
-  logging_log_group = var.logging_log_group_courses
+  logging_log_group = var.logging_log_group_get_course
 
   tags = module.label_get_course.tags
 }
@@ -169,7 +169,7 @@ module "lambda_function_save_course" {
   }
 
   use_existing_cloudwatch_log_group = true
-  logging_log_group = var.logging_log_group_courses
+  logging_log_group = var.logging_log_group_save_course
 
   tags = module.label_save_course.tags
 }
@@ -201,7 +201,7 @@ module "lambda_function_update_course" {
     }
 
     use_existing_cloudwatch_log_group = true
-    logging_log_group = var.logging_log_group_courses
+    logging_log_group = var.logging_log_group_update_course
 
   tags = module.label_update_course.tags
 }
@@ -233,7 +233,7 @@ module "lambda_function_delete_course" {
   }
 
   use_existing_cloudwatch_log_group = true
-  logging_log_group = var.logging_log_group_courses
+  logging_log_group = var.logging_log_group_delete_course
 
   tags = module.label_delete_course.tags
 }

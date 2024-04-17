@@ -35,6 +35,10 @@ module "lambdas" {
   aws_api_gateway_rest_api_execution_arn = aws_api_gateway_rest_api.this.execution_arn
   logging_log_group_authors = module.cloudwatch.cloudwatch_log_group_get_all_authors_name
   logging_log_group_courses = module.cloudwatch.cloudwatch_log_group_get_all_courses_name
+  logging_log_group_get_course = module.cloudwatch.cloudwatch_log_group_get_course_name
+  logging_log_group_update_course = module.cloudwatch.cloudwatch_log_group_update_course_name
+  logging_log_group_save_course = module.cloudwatch.cloudwatch_log_group_save_course_name
+  logging_log_group_delete_course = module.cloudwatch.cloudwatch_log_group_delete_course_name
 
 }
 

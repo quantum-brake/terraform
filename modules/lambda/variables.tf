@@ -41,3 +41,19 @@ variable "logging_log_group_authors" {
 variable "logging_log_group_courses" {
   type = string
 }
+
+variable "logging_log_group_delete_course" {
+  type = string
+}
+
+variable "logging_log_group_save_course" {
+  type = string
+}
+
+variable "logging_log_group_get_course" {
+  type = string
+}
+
+variable "logging_log_group_update_course" {
+  type = string
+}
