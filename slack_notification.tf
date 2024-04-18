@@ -20,5 +20,5 @@ module "notify_slack" {
 resource "aws_sns_topic_subscription" "email" {
   topic_arn = module.notify_slack.slack_topic_arn
   protocol  = "email"
-  endpoint  = "ihor.kostetskyi.ri.2023@lpnu.ua"
+  endpoint  = var.slack_email
 }
