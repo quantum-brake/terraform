@@ -5,24 +5,29 @@ module "front_application" {
   bucket = module.label_front_app.id
   acl    = "private"
 
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+
   control_object_ownership = true
   object_ownership         = "ObjectWriter"
 
 }
 
-data "aws_iam_policy_document" "s3_policy" {
-  statement {
-    actions   = ["s3:GetObject"]
-    resources = ["${module.front_application.s3_bucket_arn}/*"]
 
-    principals {
-      type        = "AWS"
-      identifiers = [module.cdn.cloudfront_origin_access_identity_ids[0]]
-    }
+resource "aws_s3_bucket_policy" "cloudfront_s3_bucket_policy" {
+  bucket = module.front_application.s3_bucket_id
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+  {
+    "Sid": "AddPerm",
+    "Effect": "Allow",
+    "Principal": "*",
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::${module.front_application.s3_bucket_id}/*"
   }
+  ]
+  })
 }
-
-# resource "aws_s3_bucket_policy" "this" {
-#   bucket = module.front_application.s3_bucket_id
-#   policy = data.aws_iam_policy_document.s3_policy.json
-# }

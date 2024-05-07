@@ -20,16 +20,6 @@ module "cdn" {
   #   }
 
   origin = {
-    # something = {
-    #   domain_name = "something.example.com"
-    #   custom_origin_config = {
-    #     http_port              = 80
-    #     https_port             = 443
-    #     origin_protocol_policy = "match-viewer"
-    #     origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
-    #   }
-    # }
-
     s3_one = {
       domain_name = module.front_application.s3_bucket_bucket_regional_domain_name
       s3_origin_config = {
@@ -46,29 +36,12 @@ module "cdn" {
     target_origin_id           = "s3_one"
     viewer_protocol_policy     = "allow-all"
 
-    allowed_methods = ["GET", "HEAD", "OPTIONS"]
+    allowed_methods = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
     cached_methods  = ["GET", "HEAD"]
     compress        = true
     query_string    = true
   }
 
-  #   ordered_cache_behavior = [
-  #     {
-  #       path_pattern           = "/static/*"
-  #       target_origin_id       = "s3_one"
-  #       viewer_protocol_policy = "redirect-to-https"
-
-  #       allowed_methods = ["GET", "HEAD", "OPTIONS"]
-  #       cached_methods  = ["GET", "HEAD"]
-  #       compress        = true
-  #       query_string    = true
-  #     }
-  #   ]
-
-  #   viewer_certificate = {
-  #     acm_certificate_arn = "arn:aws:acm:us-east-1:135367859851:certificate/1032b155-22da-4ae0-9f69-e206f825458b"
-  #     ssl_support_method  = "sni-only"
-  #   }
   default_root_object = "index.html"
 
   custom_error_response = [{
@@ -83,3 +56,4 @@ module "cdn" {
     response_page_path = "/index.html"
   }]
 }
+

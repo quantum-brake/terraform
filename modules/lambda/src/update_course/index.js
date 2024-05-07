@@ -5,6 +5,9 @@ const dynamodb = new AWS.DynamoDB({
 });
 
 exports.handler = (event, context, callback) => {
+    console.log("Event:", JSON.stringify(event));
+
+    try{
     const params = {
         Item: {
             id: {
@@ -31,4 +34,8 @@ exports.handler = (event, context, callback) => {
             });
         }
     });
+    } catch (error) {
+        console.error("Error:", error.message);
+        callback(error);
+    }
 };
